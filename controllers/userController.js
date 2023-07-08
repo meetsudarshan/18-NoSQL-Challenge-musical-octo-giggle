@@ -2,11 +2,12 @@ const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models/index");
 
 module.exports = {
+  // Get all users
   async getUsers(req, res) {
     try {
-      const gUser = await User.find();
+      const users = await User.find();
       const userObj = {
-        gUser,
+        users,
       };
       res.json(userObj);
     } catch (err) {
@@ -15,37 +16,38 @@ module.exports = {
     }
   },
 
+  // Get a single user by ID
   async getSingleUser(req, res) {
     try {
-      const gsUser = await User.findOne({ _id: req.params.userId }).select(
-        "-__v"
-      );
+      const user = await User.findOne({ _id: req.params.userId }).select("-__v");
 
-      if (!gsUser) {
-        return res.status(404).json({ message: "No user with that ID" });
+      if (!user) {
+        return res.status(404).json({ message: "User not found with the provided ID" });
       }
 
       res.json({
-        gsUser,
+        user,
       });
     } catch (err) {
       console.log(err);
-      return res.json(500).json(err);
+      return res.status(500).json(err);
     }
   },
 
+  // Create a new user
   async createUser(req, res) {
     try {
-      const cUser = await User.create(req.body);
-      res.json(cUser);
+      const newUser = await User.create(req.body);
+      res.json(newUser);
     } catch (err) {
       res.status(500).json(err);
     }
   },
 
+  // Update a user by ID
   async updateUser(req, res) {
     try {
-      const upUser = await User.findOneAndUpdate(
+      const updatedUser = await User.findOneAndUpdate(
         {
           _id: req.params.userId,
         },
@@ -53,61 +55,64 @@ module.exports = {
         { runValidators: true, new: true }
       );
 
-      if (!upUser) {
-        return res.status(404).json({ message: "No user with that ID" });
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found with the provided ID" });
       }
 
-      res.json(upUser);
+      res.json(updatedUser);
     } catch (err) {
       res.status(500).json(err);
     }
   },
 
+  // Delete a user by ID
   async deleteUser(req, res) {
     try {
-      const delUser = await User.findOneAndRemove({ _id: req.params.userId });
+      const deletedUser = await User.findOneAndRemove({ _id: req.params.userId });
 
-      if (!delUser) {
-        return res.status(404).json({ message: "No user found with that ID" });
+      if (!deletedUser) {
+        return res.status(404).json({ message: "User not found with the provided ID" });
       }
 
-      res.json({ message: "User successfully deleted" });
+      res.json({ message: "User deleted successfully" });
     } catch (err) {
       res.status(500).json(err);
     }
   },
 
+  // Add a friend to a user
   async addFriend(req, res) {
     try {
-      const aFriend = await User.findOneAndUpdate(
+      const updatedUser = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $addToSet: { friends: req.params.friendId } },
         { runValidators: true, new: true }
       );
 
-      if (!aFriend) {
-        return res.status(404).json({ message: "No user found with that ID" });
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found with the provided ID" });
       }
 
-      res.json(aFriend);
+      res.json(updatedUser);
     } catch (err) {
       res.status(500).json(err);
     }
   },
 
+  // Delete a friend from a user
   async deleteFriend(req, res) {
     try {
-      const delFriend = await User.findOneAndUpdate(
+      const updatedUser = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $pull: { friends: req.params.friendId } },
         { runValidators: true, new: true }
       );
 
-      if (!delFriend) {
-        return res.status(404).json({ message: "No user with that ID" });
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found with the provided ID" });
       }
 
-      res.json(delFriend);
+      res.json(updatedUser);
     } catch (err) {
       res.status(500).json(err);
     }

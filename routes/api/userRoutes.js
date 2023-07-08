@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+// Import the necessary userController functions
 const {
   getUsers,
   getSingleUser,
@@ -10,10 +11,21 @@ const {
   deleteFriend,
 } = require("../../controllers/userController");
 
-router.route("/").get(getUsers).post(createUser);
+// Set up routes for "/users"
+router.route("/")
+  .get(getUsers) // GET route to get all users
+  .post(createUser); // POST route to create a new user
 
-router.route("/:userId").get(getSingleUser).delete(deleteUser).put(updateUser);
+// Set up routes for "/users/:userId"
+router.route("/:userId")
+  .get(getSingleUser) // GET route to get a single user by ID
+  .delete(deleteUser) // DELETE route to delete a user by ID
+  .put(updateUser); // PUT route to update a user by ID
 
-router.route("/:userId/friends/:friendId").post(addFriend).delete(deleteFriend);
+// Set up routes for "/users/:userId/friends/:friendId"
+router.route("/:userId/friends/:friendId")
+  .post(addFriend) // POST route to add a friend to a user
+  .delete(deleteFriend); // DELETE route to remove a friend from a user
 
+// Export the router
 module.exports = router;
