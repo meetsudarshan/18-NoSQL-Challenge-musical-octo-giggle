@@ -1,6 +1,6 @@
 # 18-NoSQL-Challenge-musical-octo-giggle
 
-
+![insomnia](https://img.shields.io/badge/Insomnia-5849be?style=for-the-badge&logo=Insomnia&logoColor=white)
 
 ## User Story
 
@@ -22,6 +22,12 @@ WHEN I test API POST, PUT, and DELETE routes in Insomnia
 THEN I am able to successfully create, update, and delete users and thoughts in my database
 WHEN I test API POST and DELETE routes in Insomnia
 THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
+
+
+###Link to video
+
+[(click here to watch the video)](https://drive.google.com/file/d/1PyZYaRTLfP7SmjPaasNbyJmM1d_x7JQR/view)
+
 
 For reference
 
