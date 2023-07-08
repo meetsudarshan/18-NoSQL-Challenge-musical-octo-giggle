@@ -26,7 +26,8 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 ###Link to video
 
-[![][(click here to watch the video)](https://drive.google.com/file/d/1PyZYaRTLfP7SmjPaasNbyJmM1d_x7JQR/view)
+[![][(click here to watch the video)]([https://drive.google.com/file/d/1PyZYaRTLfP7SmjPaasNbyJmM1d_x7JQR/view])
+
 
 
 For reference
